@@ -6,6 +6,10 @@ embed-resources: true
 orientation: rows
 ---
 
+#  {.sidebar}
+
+These charts are created from the 2024 National Survey on Drug Use and Health. 
+
 ```{r}
 #| label: install-packages
 #install.packages('tidyverse')
@@ -29,7 +33,7 @@ library(ggplot2)
 ```{r}
 #| label: load-data
 
-nsduh2024 <- import(here("data", "NSDUH_2024.RData"), trust = TRUE) |>
+nsduh2024 <- import(here("NSDUH_2024.RData"), trust = TRUE) |>
   as_tibble() |>
   clean_names() |>
     select(questid2, analwt2_c, vestr_c, verep, catag6, irsex, newrace2, eduhighcat, govtprog,
@@ -42,7 +46,7 @@ nsduh2024 <- import(here("data", "NSDUH_2024.RData"), trust = TRUE) |>
 #| label: format-data
 
 # add labels, values, and turn into factors or character variables as needed
-sapply(nsduh2024, class)
+
 nsduh2024 <- nsduh2024 %>%
   mutate(poverty3 = as.factor(poverty3)) %>%
   mutate(irpyud5alc = as.factor(irpyud5alc))
@@ -53,7 +57,7 @@ nsduh2024 <- nsduh2024 %>%
 
 # Lab PS3: Visual from Project Data
 
-## Row {height='80%'}
+## Row {height="80%"}
 
 ```{r}
 #| title: 'First Visual'
