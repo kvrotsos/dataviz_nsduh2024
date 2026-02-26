@@ -2,17 +2,18 @@
 title: "Data Visualization Project"
 author: "Kat Vrotsos and Rachel Byers"
 format: dashboard
-editor: visual
+embed-resources: true
+orientation: rows
 ---
 
 ```{r}
 #| label: install-packages
-install.packages('tidyverse')
-install.packages('here')
-install.packages('rio')
-install.packages('janitor')
-install.packages('survey')
-install.packages('ggplot2')
+#install.packages('tidyverse')
+#install.packages('here')
+#install.packages('rio')
+#install.packages('janitor')
+#install.packages('survey')
+#install.packages('ggplot2')
 ```
 
 ```{r}
@@ -45,19 +46,20 @@ sapply(nsduh2024, class)
 nsduh2024 <- nsduh2024 %>%
   mutate(poverty3 = as.factor(poverty3)) %>%
   mutate(irpyud5alc = as.factor(irpyud5alc))
+
+
+#not sure where the list of variable types is coming from when rendered??
 ```
 
+# Lab PS3: Visual from Project Data
+
+## Row {height='80%'}
+
 ```{r}
-#| label: first visual
+#| title: 'First Visual'
 
 ggplot(nsduh2024, aes(x = newrace2)) +
   geom_bar(fill = "steelblue") +
   theme_minimal() +
   labs(title = "Count of Race/Ethnicity", x = "Race/Ethnicity", y = "Count")
 ```
-
-# Lab PS3: Visual from Project Data
-
-## heading w/sidebar {.sidebar}
-
-...
