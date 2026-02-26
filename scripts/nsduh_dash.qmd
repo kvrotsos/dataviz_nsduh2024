@@ -41,13 +41,19 @@ nsduh2024 <- import(here("data", "NSDUH_2024.RData"), trust = TRUE) |>
 #| label: format-data
 
 # add labels, values, and turn into factors or character variables as needed
-
 sapply(nsduh2024, class)
 nsduh2024 <- nsduh2024 %>%
   mutate(poverty3 = as.factor(poverty3)) %>%
   mutate(irpyud5alc = as.factor(irpyud5alc))
+```
 
+```{r}
+#| label: first visual
 
+ggplot(nsduh2024, aes(x = newrace2)) +
+  geom_bar(fill = "steelblue") +
+  theme_minimal() +
+  labs(title = "Count of Race/Ethnicity", x = "Race/Ethnicity", y = "Count")
 ```
 
 # Lab PS3: Visual from Project Data
