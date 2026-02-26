@@ -1,0 +1,51 @@
+---
+title: "Data Visualization Project"
+author: "Kat Vrotsos and Rachel Byers"
+format: dashboard
+editor: visual
+---
+
+```{r}
+#| label: install-packages
+install.packages('tidyverse')
+install.packages('here')
+install.packages('rio')
+install.packages('janitor')
+install.packages('survey')
+install.packages('ggplot2')
+```
+
+```{r}
+#| label: load-packages
+library(tidyverse)
+library(here)
+library(rio)
+library(janitor)
+library(survey)
+library(ggplot2)
+```
+
+```{r}
+#| label: load-data
+
+nsduh2024 <- import(here("data", "NSDUH_2024.RData"), trust = TRUE) |>
+  as_tibble() |>
+  clean_names() |>
+    select(questid2, analwt2_c, vestr_c, verep, catag6, irsex, newrace2, eduhighcat, govtprog,
+         income, poverty3, health2, iralcage, irmjage, irstmnmage, illemflag2, stmnmlif,
+         irpyud5alc, irpyud5mrj, ud5cnsany, ud5opiany2)
+
+```
+
+```{r}
+#| label: format-data
+
+# add labels, values, and turn into factors or character variables as needed
+
+```
+
+# Lab PS3: Visual from Project Data
+
+## heading w/sidebar {.sidebar}
+
+...
