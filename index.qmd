@@ -44,6 +44,7 @@ nsduh2024 <- import(here("NSDUH_2024.RData"), trust = TRUE) |>
 
 ```{r}
 #| label: format-data
+#| echo: false
 
 # add labels, values, and turn into factors or character variables as needed
 
