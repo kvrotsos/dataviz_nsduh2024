@@ -81,3 +81,16 @@ ggplot(nsduh2024, aes(x = newrace2)) +
   theme_minimal() +
   labs(title = "Count of Race/Ethnicity", x = "Race/Ethnicity", y = "Count")
 ```
+# Visual 2: Alcohol Use Disorder and Poverty
+
+## Row {height="80%"}
+```{r}
+#| title: 'Second Visual: Alcohol Use Disorder by Poverty level'
+
+ggplot(na.omit(nsduh2024), aes(x = poverty3, fill = irpyud5alc)) +
+  geom_bar() +
+  theme_minimal() +
+  labs(title = "Alcohol Use Disorder by Poverty Level", x = "Poverty Level", y = "Count",
+       fill = "Alcohol Use Disorder")
+```
+
