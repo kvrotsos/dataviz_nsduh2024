@@ -8,7 +8,7 @@ orientation: rows
 
 #  {.sidebar}
 
-These charts are created from the 2024 National Survey on Drug Use and Health. 
+These charts are created from the 2024 National Survey on Drug Use and Health (NSDUH). NSDUH began in 1971 and provides important information to guide and support prevention and treatment programs. NSDUH provides data for monitoring substance use trends and provides critical information to inform public health policy.
 
 ```{r}
 #| label: install-packages
@@ -50,9 +50,10 @@ nsduh2024 <- import(here("NSDUH_2024.RData"), trust = TRUE) |>
 nsduh2024 <- nsduh2024 %>%
   mutate(poverty3 = as.factor(poverty3)) %>%
   mutate(irpyud5alc = as.factor(irpyud5alc))
+nsduh2024$poverty3 <- as.factor(nsduh2024$poverty3)
+summary("poverty3")
+# conversion to factor not working?? what am I missing here??
 
-
-#not sure where the list of variable types is coming from when rendered??
 ```
 
 # Lab PS3: Visual from Project Data
