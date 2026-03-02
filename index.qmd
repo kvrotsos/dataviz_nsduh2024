@@ -44,7 +44,6 @@ nsduh2024 <- import(here("NSDUH_2024.RData"), trust = TRUE) |>
 
 ```{r}
 #| label: format-data
-#| echo: false
 
 # add labels, values, and turn into factors or character variables as needed
 
@@ -53,14 +52,12 @@ nsduh2024$irpyud5alc <- factor(
   levels = c("0", "1"),
   labels = c("No", "Yes")
 )
-summary(nsduh2024$irpyud5alc)
 
 nsduh2024$poverty3 <- factor(
   nsduh2024$poverty3,
   levels = c(".", "1", "2", "3"),           # Order of levels
   labels = c("College Dorm", "Below Poverty Threshold", "Income up to 2x Threshold", "Income up to 3x Threshold") # Labels for each level
 )
-summary(nsduh2024$poverty3)
 
 ```
 
