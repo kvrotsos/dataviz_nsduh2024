@@ -130,7 +130,14 @@ The complete 2024 NSDUH data set is very large and provides a wealth of informat
 ### Final Version
 
 ```{r}
-
+ggplot(nsduh2024, aes(x = newrace2)) +
+  geom_bar(fill = "steelblue") +
+  theme_minimal() +
+  labs(title = "2024 NSDUH Data Subset Race/Ethnicity", x = "Race/Ethnicity", y = "Count") +
+  theme(axis.text.x = element_text(
+      angle = 45,        
+      hjust = 1,        
+      vjust = 1))
 ```
 
 ### Draft 2
@@ -143,7 +150,11 @@ The complete 2024 NSDUH data set is very large and provides a wealth of informat
 ggplot(nsduh2024, aes(x = newrace2)) +
   geom_bar(fill = "steelblue") +
   theme_minimal() +
-  labs(title = "Count of Race/Ethnicity", x = "Race/Ethnicity", y = "Count")
+  labs(title = "2024 NSDUH Data Subset Race/Ethnicity", x = "Race/Ethnicity", y = "Count") +
+  theme(axis.text.x = element_text(
+      angle = 45,        
+      hjust = 1,        
+      vjust = 1))
 
 ```
 
