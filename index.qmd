@@ -123,7 +123,7 @@ nsduh2024$irpyud5mrj <- factor(
 ## Row (.panel height="20%")
 
 ### About
-Description
+The complete 2024 NSDUH data set is very large and provides a wealth of information. For the purposes of this assignment, we are using only a portion of the data. The visual below provides a breakdown of race/ethnicity of participants in our portion of the data.
 
 ## Row {.tabset height="80%"}
 
