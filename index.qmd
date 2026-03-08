@@ -175,7 +175,7 @@ ggplot(nsduh2024, aes(x = newrace2)) +
 ## Row (.panel height="20%")
 
 ### About
-Description
+One of the demographic pieces of information captured by the NSDUH is poverty status. The data set also provides information on alcohol use disorder. We wanted to see the breakdown of alcohol use disorder by poverty status, which is shown below. 
 
 ## Row {.tabset height="80%"}
 
