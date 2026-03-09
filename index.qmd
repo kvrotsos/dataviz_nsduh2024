@@ -236,13 +236,14 @@ aud_pct_age_f$catag6 <- recode(
 
 ```
 
-## Row (.panel height="20%")
+## Row (.card height="20%")
 
 ### About
 
 Description of how these were scored from codebook based on DSM-5
 
-## Row {.tabset height="80%"}
+
+## Row {.tabset height="60%"}
 
 ### Final Version
 
@@ -335,5 +336,9 @@ Description
 ### Draft 1
 
 ```{r}
+
+nsduh2024 |>
+  ggplot(aes(irpyud5alc,irpyud5mrj)) +
+  geom_count()
 
 ```
