@@ -39,6 +39,7 @@ library(ggplot2)
 library(dplyr)
 library(RColorBrewer)
 library(ggrepel)
+library(scales)
 ```
 
 ```{r}
