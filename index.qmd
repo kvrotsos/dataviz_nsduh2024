@@ -48,9 +48,7 @@ library(ggrepel)
 nsduh2024 <- import(here("NSDUH_2024.RData"), trust = TRUE) |>
   as_tibble() |>
   clean_names() |>
-    select(questid2, analwt2_c, vestr_c, verep, catag6, irsex, newrace2, eduhighcat, govtprog,
-         income, poverty3, health2, iralcage, irmjage, irstmnmage, illemflag2, stmnmlif,
-         irpyud5alc, irpyud5mrj, ud5cnsany, ud5opiany2)
+    select(questid2, analwt2_c, vestr_c, verep, catag6, irsex, newrace2, eduhighcat, govtprog, income, poverty3, health2, iralcage, irmjage, irstmnmage, illemflag2, stmnmlif, irpyud5alc, irpyud5mrj, ud5cnsany, ud5opiany2, sutnedalcpy2, sutrtalcpy2, sutrtosvpy2)
 
 ```
 
@@ -275,7 +273,7 @@ aud_pct_age_f |>
   labs(title = 'Past-Year Alcohol Use Disorder by Age Group in 2024',
        caption = 'Source: 2024 NSDUH',
        x = 'Age (Years)',
-       y = 'Percentage') +
+       y = 'Past Year AUD (Percentage)') +
   theme_minimal() +
   scale_fill_brewer(palette = "Dark2") +
   theme(legend.position = "none",
@@ -334,10 +332,31 @@ aud_pct_age |>
 
 ```
 
-# Kat's other visual TBD
+# Received Alcohol Use Treatment if Needed
 ```{r}
 # kat
 # setting up
+
+# turn classified as needing substance use treatment for alc use - past year into a factor
+
+nsduh2024$sutnedalcpy2 <- factor(
+  nsduh2024$sutnedalcpy2,
+  levels = c('0', '1'),
+  labels = c('No', 'Yes'))
+
+# turn received substance use treatment for alc use - past year into a factor
+
+nsduh2024$sutrtalcpy2 <- factor(
+  nsduh2024$sutrtalcpy2,
+  levels = c('0', '1'),
+  labels = c('No', 'Yes'))
+
+#dataset with people who needed su treatment for alc use in the past year
+nsduh_need_alc <- nsduh2024 |>
+  filter(sutnedalcpy2 == 'Yes') |>
+  group_by(sutrtalcpy2) |>
+  summarize(treat_count = n()) |>
+  mutate(treat_pct = treat_count / sum(treat_count))
 
 ```
 
@@ -346,28 +365,58 @@ aud_pct_age |>
 ### Final Version
 
 ```{r}
+#| title: 'Past-Year Alcohol Use Treatment Needs Met in 2024'
 #| fig-width: 10
 #| fig-height: 7
 #| out-width: '100%'
 
+nsduh_need_alc |>
+  ggplot(aes(sutrtalcpy2, treat_pct, fill = sutrtalcpy2)) +
+  geom_col() +
+  scale_y_continuous(labels = scales::percent) +
+  geom_label_repel(aes(label = scales::percent(treat_pct, accuracy = 0.1)),
+                   nudge_y = 0.05,
+                   fill = NA) +
+  labs(title = 'Past-Year Alcohol Use Treatment Needs Met in 2024',
+       x = 'Received Treatment',
+       y = 'Needed Treatment (Percentage)',
+       caption = 'Source: 2024 NSDUH') +
+  theme_minimal() +
+  theme(legend.position = "none",
+        panel.grid.major.x = element_blank(),
+        plot.title = element_text(size = 16, face = "bold"),
+        axis.title = element_text(size = 12, face = "bold"),
+        axis.text.x = element_text(size = 10),
+        #axis.text.y = element_text(size = 10),
+        plot.caption = element_text(size = 9, color = "gray50", hjust = 0)
+       )
+
 ```
 
-### About
-
-Description
 
 ## Column {.tabset width="30%"}
 
 ### About
 
-Description
+Description of how needing treatment is computed
 
 ### Draft 1
 
 ```{r}
+#| title: 'Past-Year Alcohol Use Treatment Needs Met in 2024'
 #| fig-width: 10
 #| fig-height: 7
 #| out-width: '100%'
+
+nsduh_need_alc |>
+  ggplot(aes(sutrtalcpy2, treat_pct)) +
+  geom_col() +
+  scale_y_continuous(labels = scales::percent) +
+  labs(title = 'Past-Year Alcohol Use Treatment Needs Met in 2024',
+       subtitle = 'Among individuals who were classified as needing treatment for their alcohol use in the 2024 NSDUH',
+       x = 'Received Treatment',
+       y = 'Treatment Needed (Percentage)') +
+  theme_minimal()
 
 ```
 
@@ -378,5 +427,17 @@ Description
 #| fig-height: 7
 #| out-width: '100%'
 
+nsduh_need_alc |>
+  ggplot(aes(sutrtalcpy2, treat_pct, fill = sutrtalcpy2)) +
+  geom_col() +
+  scale_y_continuous(labels = scales::percent) +
+  geom_label_repel(aes(label = scales::percent(treat_pct, accuracy = 0.1)),
+                   nudge_y = 0.05,
+                   fill = NA) +
+  labs(title = 'Past-Year Alcohol Use Treatment Needs Met in 2024',
+       x = 'Received Treatment',
+       y = 'Treatment Needed (Percentage)') +
+  theme_minimal() +
+  theme(legend.position = "none")
 
 ```
