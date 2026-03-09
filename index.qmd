@@ -225,7 +225,6 @@ ggplot(na.omit(nsduh2024), aes(x = poverty3, fill = irpyud5alc)) +
 ### Draft 1
 
 ```{r}
-#| title: 'Alcohol Use Disorder by Poverty level'
 #| fig-width: 10
 #| fig-height: 7
 #| out-width: '100%'
