@@ -138,7 +138,7 @@ finaldemo <- nsduh2024 %>%
   mutate(newrace2 = fct_reorder(newrace2, n)) %>%
   ggplot(aes(x = n, y = newrace2)) +
   geom_col(fill = "#1B9E77") +
-  labs(title = "Sample Race/Ethnicity", x = "Race/Ethnicity", y = "Count", caption = 'Source: 2024 NSDUH') +
+  labs(title = "Sample Race/Ethnicity", x = "Count", y = "Race/Ethnicity", caption = 'Source: 2024 NSDUH') +
   theme_minimal()+
   theme(panel.grid.major.x = element_blank(),
         plot.title = element_text(size = 16, face = "bold"),
@@ -146,6 +146,7 @@ finaldemo <- nsduh2024 %>%
         axis.text.x = element_text(size = 12),
         axis.text.y = element_text(size = 12),
         plot.caption = element_text(size = 9, color = "gray50", hjust = 0))
+
 finaldemo
 ```
 
