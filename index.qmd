@@ -209,9 +209,10 @@ ggplot(na.omit(nsduh2024), aes(x = poverty3, fill = irpyud5alc)) +
        fill = "Alcohol Use Disorder")
 ```
 
-# Proportion of People with Alcohol Use Disorder by Age Group
+# Alcohol Use Disorder by Age Group
 
 ```{r}
+#kat
 #setting up
 
 # get proportion with aud
@@ -246,13 +247,14 @@ Description of how these were scored from codebook based on DSM-5
 ### Final Version
 
 ```{r}
-#final version
+#| title: Past-Year Alcohol Use Disorder by Age Group in 2024
 
 aud_pct_age_f |>
   ggplot(aes(reorder(catag6, aud_pct), aud_pct, fill = catag6)) +
   geom_col(position = 'dodge') +
   geom_label_repel(aes(label = scales::percent(aud_pct, accuracy = 0.1)),
-                   nudge_y = 0.01) +
+                   nudge_y = 0.01,
+                   fill = NA) +
   scale_y_continuous(labels = scales::percent) +
   coord_flip() +
   labs(title = 'Past-Year Alcohol Use Disorder by Age Group in 2024',
@@ -273,7 +275,7 @@ aud_pct_age_f |>
 ### Draft 2
 
 ```{r}
-#draft 2
+#| title: Proportion of People with Past-Year Alcohol Use Disorder in 2024 by Age Group
 
 aud_pct_age |>
   ggplot(aes(catag6, aud_pct)) +
@@ -290,7 +292,7 @@ aud_pct_age |>
 ### Draft 1
 
 ```{r}
-#draft 1
+#| title: Number of People with Past-Year Alcohol Use Disorder by Age Group in 2024
 
 nsduh_sud |>
   group_by(catag6) |>
@@ -304,6 +306,11 @@ nsduh_sud |>
 ```
 
 # Kat's other visual TBD
+```{r}
+# kat
+# setting up
+
+```
 
 ## Row (.panel height="20%")
 
