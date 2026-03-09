@@ -198,7 +198,6 @@ ggplot(nsduh2024, aes(x = newrace2)) +
 #| out-width: '100%'
 
 
-
 ```
 
 ## Column {.tabset width="30%"}
@@ -228,6 +227,29 @@ ggplot(na.omit(nsduh2024), aes(x = poverty3, fill = irpyud5alc)) +
 #| fig-width: 10
 #| fig-height: 7
 #| out-width: '100%'
+
+ggplot(na.omit(nsduh2024), aes(x = poverty3, fill = irpyud5alc)) +
+  geom_bar() +
+  theme_minimal() +
+  labs(title = "Alcohol Use Disorder by Poverty Level", x = "Poverty Level", y = "Count",
+       fill = "Alcohol Use Disorder") +
+  scale_fill_brewer(palette = "Dark2") +
+  theme(legend.position = "none",
+        panel.grid.major.x = element_blank(),
+        plot.title = element_text(size = 16, face = "bold"),
+        axis.title = element_text(size = 12, face = "bold"),
+        axis.text.x = element_text(size = 10),
+        plot.caption = element_text(size = 9, color = "gray50", hjust = 0))
+  
+#use to add percentage labels??
+
+
+#nsduh2024AUlabels = nsduh2024 %>%
+  #arrange(irpyud5alc, desc(value)) %>%
+  #group_by(irpyud5alc) %>%
+  #mutate(label_y = 0.5 * cumsum(pct),
+         #label_y = cumsum(label_y)) %>%
+  #ungroup()
 
 ```
 
