@@ -130,15 +130,21 @@ nsduh2024$irpyud5mrj <- factor(
 #| fig-width: 10
 #| fig-height: 7
 #| out-width: '100%'
-
-ggplot(nsduh2024, aes(x = newrace2)) +
-  geom_bar(fill = "steelblue") +
-  theme_minimal() +
-  labs(title = "2024 NSDUH Data Subset Race/Ethnicity", x = "Race/Ethnicity", y = "Count") +
-  theme(axis.text.x = element_text(
-      angle = 45,        
-      hjust = 1,        
-      vjust = 1))
+  
+finaldemo <- nsduh2024 %>%
+  drop_na(newrace2) %>%
+  count(newrace2) %>%
+  mutate(newrace2 = fct_reorder(newrace2, n)) %>%
+  ggplot(aes(x = n, y = newrace2)) +
+  geom_col(fill = "#1B9E77") +
+  labs(title = "Sample Race/Ethnicity", x = "Race/Ethnicity", y = "Count", caption = 'Source: 2024 NSDUH') +
+  theme_minimal()+
+  theme(panel.grid.major.x = element_blank(),
+        plot.title = element_text(size = 16, face = "bold"),
+        axis.title = element_text(size = 12, face = "bold"),
+        axis.text.x = element_text(size = 10),
+        plot.caption = element_text(size = 9, color = "gray50", hjust = 0))
+finaldemo
 ```
 
 ## Column {.tabset width="30%"}
@@ -150,7 +156,6 @@ The complete 2024 NSDUH data set is very large and provides a wealth of informat
 ### Draft 1
 
 ```{r}
-#| title: 'First Visual: Breakdown of Sample by Race/Ethnicity'
 #| fig-width: 10
 #| fig-height: 7
 #| out-width: '100%'
@@ -164,7 +169,6 @@ ggplot(nsduh2024, aes(x = newrace2)) +
 ### Draft 2
 
 ```{r}
-#| title: 'needs to be updated'
 #| fig-width: 10
 #| fig-height: 7
 #| out-width: '100%'
@@ -182,16 +186,18 @@ ggplot(nsduh2024, aes(x = newrace2)) +
 
 ```
 
-# Alcohol Use Disorder and Poverty
+# Alocohol Use Disorder and Poverty Status
 
 ## Column (.panel width="70%")
 
-## Final Version
+### Final Version
 
 ```{r}
 #| fig-width: 10
 #| fig-height: 7
 #| out-width: '100%'
+
+
 
 ```
 
@@ -284,7 +290,6 @@ aud_pct_age_f |>
         #axis.text.y = element_text(size = 10),
         plot.caption = element_text(size = 9, color = "gray50", hjust = 0)
        )
-
 ```
 
 ## Column {.tabset width="30%"}
