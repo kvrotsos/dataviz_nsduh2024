@@ -10,15 +10,15 @@ embed-resources: true
 orientation: rows
 ---
 
-# {.sidebar}
-
-These charts are created from the 2024 National Survey on Drug Use and Health (NSDUH). NSDUH began in 1971 and provides important information to guide and support prevention and treatment programs. NSDUH provides data for monitoring substance use trends and provides critical information to inform public health policy. Learn more about NSDUH at <https://nsduhweb.rti.org/respweb/homepage.cfm>
+# Data {.sidebar}
+These charts were created from the 2024 National Survey on Drug Use and Health (NSDUH). NSDUH began in 1971 and provides important information to guide and support prevention and treatment programs. NSDUH provides data for monitoring substance use trends and provides critical information to inform public health policy. Learn more about NSDUH at <https://nsduhweb.rti.org/respweb/homepage.cfm>
 
 These figures were created with unweighted survey data. In order to interpret the values as nationally representative, complex survey design, including survey weights, must be applied to the data. Our figures are only intended to display our ability to visualize data for the purposes of this class.
 
 
 ```{r}
 #| label: install-packages
+#| echo: false
 #install.packages('tidyverse')
 #install.packages('here')
 #install.packages('rio')
@@ -29,6 +29,7 @@ These figures were created with unweighted survey data. In order to interpret th
 
 ```{r}
 #| label: load-packages
+#| echo: false
 library(tidyverse)
 library(here)
 library(rio)
