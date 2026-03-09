@@ -233,7 +233,7 @@ ggplot(na.omit(nsduh2024), aes(x = poverty3, fill = irpyud5alc)) +
 #kat
 #setting up
 
-# get proportion with aud
+# get proportion of age group with aud
 aud_pct_age <- nsduh2024 |>
   group_by(catag6, irpyud5alc) |>
   summarize(aud_count = n()) |>
@@ -250,7 +250,7 @@ aud_pct_age_f$catag6 <- recode(
     '26-34 Years Old' = '26 to 34', 
     '34-49 Years Old' = '34 to 49',
     '50-64 Years Old' = '50 to 64',
-    '65 or Older' = '65 and up')
+    '65 or Older' = '65+')
 
 ```
 
@@ -265,13 +265,13 @@ aud_pct_age_f$catag6 <- recode(
 #| out-width: '100%'
 
 aud_pct_age_f |>
-  ggplot(aes(reorder(catag6, aud_pct), aud_pct, fill = catag6)) +
+  ggplot(aes(catag6, aud_pct, fill = catag6)) +
   geom_col(position = 'dodge') +
   geom_label_repel(aes(label = scales::percent(aud_pct, accuracy = 0.1)),
                    nudge_y = 0.01,
                    fill = NA) +
   scale_y_continuous(labels = scales::percent) +
-  coord_flip() +
+  #coord_flip() +
   labs(title = 'Past-Year Alcohol Use Disorder by Age Group in 2024',
        caption = 'Source: 2024 NSDUH',
        x = 'Age (Years)',
@@ -279,9 +279,11 @@ aud_pct_age_f |>
   theme_minimal() +
   scale_fill_brewer(palette = "Dark2") +
   theme(legend.position = "none",
-        panel.grid.major.y = element_blank(),
+        panel.grid.major.x = element_blank(),
         plot.title = element_text(size = 16, face = "bold"),
         axis.title = element_text(size = 12, face = "bold"),
+        axis.text.x = element_text(size = 10),
+        #axis.text.y = element_text(size = 10),
         plot.caption = element_text(size = 9, color = "gray50", hjust = 0)
        )
 
