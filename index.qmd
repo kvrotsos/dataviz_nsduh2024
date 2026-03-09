@@ -35,6 +35,8 @@ library(janitor)
 library(survey)
 library(ggplot2)
 library(dplyr)
+library(RColorBrewer)
+library(ggrepel)
 ```
 
 ```{r}
@@ -123,6 +125,7 @@ nsduh2024$irpyud5mrj <- factor(
 ## Row (.panel height="20%")
 
 ### About
+
 The complete 2024 NSDUH data set is very large and provides a wealth of information. For the purposes of this assignment, we are using only a portion of the data. The visual below provides a breakdown of race/ethnicity of participants in our portion of the data.
 
 ## Row {.tabset height="80%"}
@@ -169,13 +172,13 @@ ggplot(nsduh2024, aes(x = newrace2)) +
   labs(title = "Count of Race/Ethnicity", x = "Race/Ethnicity", y = "Count")
 ```
 
-
 # Alcohol Use Disorder and Poverty
 
 ## Row (.panel height="20%")
 
 ### About
-One of the demographic pieces of information captured by the NSDUH is poverty status. The data set also provides information on alcohol use disorder. We wanted to see the breakdown of alcohol use disorder by poverty status, which is shown below. 
+
+One of the demographic pieces of information captured by the NSDUH is poverty status. The data set also provides information on alcohol use disorder. We wanted to see the breakdown of alcohol use disorder by poverty status, which is shown below.
 
 ## Row {.tabset height="80%"}
 
@@ -203,11 +206,35 @@ ggplot(na.omit(nsduh2024), aes(x = poverty3, fill = irpyud5alc)) +
        fill = "Alcohol Use Disorder")
 ```
 
-# Prevalence of Alcohol and Cannabis Use Disorders by Age Group
+# Proportion of People with Alcohol Use Disorder by Age Group
+```{r}
+#setting up
+
+# get proportion with aud
+aud_pct_age <- nsduh2024 |>
+  group_by(catag6, irpyud5alc) |>
+  summarize(aud_count = n()) |>
+  mutate(aud_pct = aud_count / sum(aud_count)) |>
+  filter(irpyud5alc == "Yes")
+
+aud_pct_age_f <- aud_pct_age
+
+# shorten catag6 values for final viz
+aud_pct_age_f$catag6 <- recode(
+  aud_pct_age_f$catag6,
+    '12-17 Years Old' = '12 to 17', 
+    '18-25 Years Old' = '18 to 25', 
+    '26-34 Years Old' = '26 to 34', 
+    '34-49 Years Old' = '34 to 49',
+    '50-64 Years Old' = '50 to 64',
+    '65 or Older' = '65 and up')
+
+```
 
 ## Row (.panel height="20%")
 
 ### About
+
 Description of how these were scored from codebook based on DSM-5
 
 ## Row {.tabset height="80%"}
@@ -215,26 +242,35 @@ Description of how these were scored from codebook based on DSM-5
 ### Final Version
 
 ```{r}
+#final version
+
+aud_pct_age_f |>
+  ggplot(aes(reorder(catag6, aud_pct), aud_pct, fill = catag6)) +
+  geom_col(position = 'dodge') +
+  geom_label_repel(aes(label = scales::percent(aud_pct, accuracy = 0.1)),
+                   nudge_y = 0.01) +
+  scale_y_continuous(labels = scales::percent) +
+  coord_flip() +
+  labs(title = 'Past-Year Alcohol Use Disorder by Age Group in 2024',
+       caption = 'Source: 2024 NSDUH',
+       x = 'Age (Years)',
+       y = 'Percentage') +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Dark2") +
+  theme(legend.position = "none",
+        panel.grid.major.y = element_blank(),
+        plot.title = element_text(size = 16, face = "bold"),
+        axis.title = element_text(size = 12, face = "bold"),
+        plot.caption = element_text(size = 9, color = "gray50", hjust = 0)
+       )
 
 ```
 
 ### Draft 2
 
 ```{r}
+#draft 2
 
-```
-
-### Draft 1
-
-```{r}
-#| title: Proportion of People with Past-Year Alcohol Use Disorder in 2024 by Age Group
-
-aud_pct_age <- nsduh2024 |>
-  group_by(catag6, irpyud5alc) |>
-  summarize(aud_count = n()) |>
-  mutate(aud_pct = aud_count / sum(aud_count)) |>
-  filter(irpyud5alc == "Yes")
-  
 aud_pct_age |>
   ggplot(aes(catag6, aud_pct)) +
   geom_col(position = 'dodge') +
@@ -247,11 +283,28 @@ aud_pct_age |>
 
 ```
 
+### Draft 1
+
+```{r}
+#draft 1
+
+nsduh_sud |>
+  group_by(catag6) |>
+  ggplot(aes(catag6, aud_count)) +
+  geom_col() +
+  labs(title = 'Number of People with Past-Year Alcohol Use Disorder by Age Group in 2024',
+       x = 'Age Group',
+       y = 'Count') +
+  theme_minimal()
+
+```
+
 # Kat's other visual TBD
 
 ## Row (.panel height="20%")
 
 ### About
+
 Description
 
 ## Row {.tabset height="80%"}
@@ -273,4 +326,3 @@ Description
 ```{r}
 
 ```
-
