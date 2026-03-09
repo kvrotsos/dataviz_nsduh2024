@@ -242,7 +242,7 @@ aud_pct_age_f$catag6 <- recode(
 
 ```{r}
 #| title: Past-Year Alcohol Use Disorder by Age Group in 2024
-#| panel: fill
+#| out-width: '100%'
 
 aud_pct_age_f |>
   ggplot(aes(reorder(catag6, aud_pct), aud_pct, fill = catag6)) +
@@ -277,7 +277,7 @@ Description of how these were scored from codebook based on DSM-5
 
 ```{r}
 #| title: Proportion of People with Past-Year Alcohol Use Disorder in 2024 by Age Group
-#| panel: fill
+#| out-width: '100%'
 
 aud_pct_age |>
   ggplot(aes(catag6, aud_pct)) +
@@ -295,7 +295,7 @@ aud_pct_age |>
 
 ```{r}
 #| title: Number of People with Past-Year Alcohol Use Disorder by Age Group in 2024
-#| panel: fill
+#| out-width: '100%'
 
 nsduh_sud |>
   group_by(catag6) |>
