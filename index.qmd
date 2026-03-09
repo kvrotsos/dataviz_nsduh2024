@@ -236,14 +236,14 @@ aud_pct_age_f$catag6 <- recode(
 
 ```
 
-## Row (.card height="20%")
+## Row (.card .flow)
 
 ### About
 
 Description of how these were scored from codebook based on DSM-5
 
 
-## Row {.tabset height="60%"}
+## Row {.tabset .flow}
 
 ### Final Version
 
