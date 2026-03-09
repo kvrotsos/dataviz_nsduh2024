@@ -7,7 +7,7 @@ format:
       light: minty
       dark: solar
 embed-resources: true
-orientation: rows
+orientation: columns
 ---
 
 # Data {.sidebar}
@@ -106,7 +106,6 @@ nsduh2024$poverty3 <- factor(
 
 # race/ethnicity as a factor
 
-class("newrace2")
 nsduh2024$newrace2 <- factor(
   nsduh2024$newrace2,
   levels = c("1", "2", "3", "4", "5", "6", "7"),           # Order of levels
@@ -125,17 +124,15 @@ nsduh2024$irpyud5mrj <- factor(
 
 # Sample by Race/Ethnicity
 
-## Row (.panel height="20%")
-
-### About
-
-The complete 2024 NSDUH data set is very large and provides a wealth of information. For the purposes of this assignment, we are using only a portion of the data. The visual below provides a breakdown of race/ethnicity of participants in our portion of the data.
-
-## Row {.tabset height="80%"}
+## Column (.panel width="70%")
 
 ### Final Version
 
 ```{r}
+#| fig-width: 10
+#| fig-height: 7
+#| out-width: '100%'
+
 ggplot(nsduh2024, aes(x = newrace2)) +
   geom_bar(fill = "steelblue") +
   theme_minimal() +
@@ -146,10 +143,33 @@ ggplot(nsduh2024, aes(x = newrace2)) +
       vjust = 1))
 ```
 
+## Column {.tabset width="30%"}
+
+### About
+
+The complete 2024 NSDUH data set is very large and provides a wealth of information. For the purposes of this assignment, we are using only a portion of the data. The visual below provides a breakdown of race/ethnicity of participants in our portion of the data.
+
+### Draft 1
+
+```{r}
+#| title: 'First Visual: Breakdown of Sample by Race/Ethnicity'
+#| fig-width: 10
+#| fig-height: 7
+#| out-width: '100%'
+
+ggplot(nsduh2024, aes(x = newrace2)) +
+  geom_bar(fill = "steelblue") +
+  theme_minimal() +
+  labs(title = "Count of Race/Ethnicity", x = "Race/Ethnicity", y = "Count")
+```
+
 ### Draft 2
 
 ```{r}
 #| title: 'needs to be updated'
+#| fig-width: 10
+#| fig-height: 7
+#| out-width: '100%'
 
 #edit new visual, I had to put this as a placeholder for the tab name to work properly
 
@@ -164,49 +184,47 @@ ggplot(nsduh2024, aes(x = newrace2)) +
 
 ```
 
-### Draft 1
-
-```{r}
-#| title: 'First Visual: Breakdown of Sample by Race/Ethnicity'
-
-ggplot(nsduh2024, aes(x = newrace2)) +
-  geom_bar(fill = "steelblue") +
-  theme_minimal() +
-  labs(title = "Count of Race/Ethnicity", x = "Race/Ethnicity", y = "Count")
-```
-
 # Alcohol Use Disorder and Poverty
 
-## Row (.panel height="20%")
+## Column (.panel width="70%")
+
+## Final Version
+
+```{r}
+#| fig-width: 10
+#| fig-height: 7
+#| out-width: '100%'
+
+```
+
+## Column {.tabset width="30%"}
 
 ### About
 
 One of the demographic pieces of information captured by the NSDUH is poverty status. The data set also provides information on alcohol use disorder. We wanted to see the breakdown of alcohol use disorder by poverty status, which is shown below.
 
-## Row {.tabset height="80%"}
-
-### Final Version
-
-```{r}
-
-```
-
-### Draft 2
-
-```{r}
-
-```
-
 ### Draft 1
 
 ```{r}
 #| title: 'Alcohol Use Disorder by Poverty level'
+#| fig-width: 10
+#| fig-height: 7
+#| out-width: '100%'
 
 ggplot(na.omit(nsduh2024), aes(x = poverty3, fill = irpyud5alc)) +
   geom_bar() +
   theme_minimal() +
   labs(title = "Alcohol Use Disorder by Poverty Level", x = "Poverty Level", y = "Count",
        fill = "Alcohol Use Disorder")
+```
+
+### Draft 2
+
+```{r}
+#| fig-width: 10
+#| fig-height: 7
+#| out-width: '100%'
+
 ```
 
 # Alcohol Use Disorder by Age Group
@@ -236,7 +254,7 @@ aud_pct_age_f$catag6 <- recode(
 
 ```
 
-## Row (.panel height="60%")
+## Column (.panel width="70%")
 
 ### Final Version
 
@@ -269,11 +287,30 @@ aud_pct_age_f |>
 
 ```
 
-## Row {.tabset height="40%"}
+## Column {.tabset width="30%"}
 
 ### About
 
 Description of how these were scored from codebook based on DSM-5
+
+### Draft 1
+
+```{r}
+#| title: Number of People with Past-Year Alcohol Use Disorder by Age Group in 2024
+#| fig-width: 10
+#| fig-height: 7
+#| out-width: '100%'
+
+nsduh_sud |>
+  group_by(catag6) |>
+  ggplot(aes(catag6, aud_count)) +
+  geom_col() +
+  labs(title = 'Number of People with Past-Year Alcohol Use Disorder by Age Group in 2024',
+       x = 'Age Group',
+       y = 'Count') +
+  theme_minimal()
+
+```
 
 ### Draft 2
 
@@ -295,25 +332,6 @@ aud_pct_age |>
 
 ```
 
-### Draft 1
-
-```{r}
-#| title: Number of People with Past-Year Alcohol Use Disorder by Age Group in 2024
-#| fig-width: 10
-#| fig-height: 7
-#| out-width: '100%'
-
-nsduh_sud |>
-  group_by(catag6) |>
-  ggplot(aes(catag6, aud_count)) +
-  geom_col() +
-  labs(title = 'Number of People with Past-Year Alcohol Use Disorder by Age Group in 2024',
-       x = 'Age Group',
-       y = 'Count') +
-  theme_minimal()
-
-```
-
 # Kat's other visual TBD
 ```{r}
 # kat
@@ -321,32 +339,42 @@ nsduh_sud |>
 
 ```
 
-## Row (.panel height="20%")
+## Column (.panel width="70%")
+
+### Final Version
+
+```{r}
+#| fig-width: 10
+#| fig-height: 7
+#| out-width: '100%'
+
+```
 
 ### About
 
 Description
 
-## Row {.tabset height="80%"}
+## Column {.tabset width="30%"}
 
-### Final Version
+### About
+
+Description
+
+### Draft 1
 
 ```{r}
+#| fig-width: 10
+#| fig-height: 7
+#| out-width: '100%'
 
 ```
 
 ### Draft 2
 
 ```{r}
+#| fig-width: 10
+#| fig-height: 7
+#| out-width: '100%'
 
-```
-
-### Draft 1
-
-```{r}
-
-nsduh2024 |>
-  ggplot(aes(irpyud5alc,irpyud5mrj)) +
-  geom_count()
 
 ```
