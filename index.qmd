@@ -11,10 +11,10 @@ orientation: columns
 ---
 
 # Data {.sidebar}
+
 These charts were created from the 2024 National Survey on Drug Use and Health (NSDUH). NSDUH began in 1971 and provides important information to guide and support prevention and treatment programs. NSDUH provides data for monitoring substance use trends and provides critical information to inform public health policy. Learn more about NSDUH at <https://nsduhweb.rti.org/respweb/homepage.cfm>
 
 These figures were created with unweighted survey data. In order to interpret the values as nationally representative, complex survey design, including survey weights, must be applied to the data. Our figures are only intended to display our ability to visualize data for the purposes of this class.
-
 
 ```{r}
 #| label: install-packages
@@ -127,6 +127,7 @@ nsduh2024$irpyud5mrj <- factor(
 ### Final Version
 
 ```{r}
+#| title: 'The complete 2024 NSDUH data set is very large and provides a wealth of information. For the purposes of this assignment, we are using only a portion of the data. The visual below provides a breakdown of race/ethnicity of participants in our portion of the data.'
 #| fig-width: 10
 #| fig-height: 7
 #| out-width: '100%'
@@ -148,10 +149,6 @@ finaldemo
 ```
 
 ## Column {.tabset width="30%"}
-
-### About
-
-The complete 2024 NSDUH data set is very large and provides a wealth of information. For the purposes of this assignment, we are using only a portion of the data. The visual below provides a breakdown of race/ethnicity of participants in our portion of the data.
 
 ### Draft 1
 
@@ -372,6 +369,7 @@ aud_pct_age |>
 ```
 
 # Received Alcohol Use Treatment if Needed
+
 ```{r}
 # kat
 # setting up
@@ -431,7 +429,6 @@ nsduh_need_alc |>
        )
 
 ```
-
 
 ## Column {.tabset width="30%"}
 
