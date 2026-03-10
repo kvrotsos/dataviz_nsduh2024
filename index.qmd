@@ -317,7 +317,7 @@ aud_pct_age_f |>
         panel.grid.major.x = element_blank(),
         plot.title = element_text(size = 16, face = "bold"),
         axis.title = element_text(size = 12, face = "bold"),
-        axis.text.x = element_text(size = 10),
+        axis.text.x = element_text(size = 10, face = "bold"),
         #axis.text.y = element_text(size = 10),
         plot.caption = element_text(size = 9, color = "gray50", hjust = 0)
        )
@@ -419,11 +419,12 @@ nsduh_need_alc |>
        y = 'Needed Treatment (Percentage)',
        caption = 'Source: 2024 NSDUH') +
   theme_minimal() +
+  scale_fill_brewer(palette = "Paired") +
   theme(legend.position = "none",
         panel.grid.major.x = element_blank(),
         plot.title = element_text(size = 16, face = "bold"),
         axis.title = element_text(size = 12, face = "bold"),
-        axis.text.x = element_text(size = 10),
+        axis.text.x = element_text(size = 12, face = "bold", color = "black"),
         #axis.text.y = element_text(size = 10),
         plot.caption = element_text(size = 9, color = "gray50", hjust = 0)
        )
