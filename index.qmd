@@ -477,3 +477,21 @@ nsduh_need_alc |>
   theme(legend.position = "none")
 
 ```
+
+# Process
+
+## Column (.panel width="50%")
+
+**Major Challenges**
+
+-   Complex survey design (i.e., sample weights and variance estimation)
+
+-   .sav data with formatting was too big (\> 100MB) for GitHub
+
+## Column (.panel width="50%")
+
+**Major Victories**
+
+-   Figured out how to format visualizations so they're not too small to read on the dashboard
+
+-   Used the .RData file and formatted variables ourselves
