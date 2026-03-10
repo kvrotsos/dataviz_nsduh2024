@@ -480,7 +480,7 @@ nsduh_need_alc |>
 
 # Process
 
-## Column (.panel width="50%")
+## Column (.panel)
 
 **Major Challenges**
 
@@ -488,7 +488,6 @@ nsduh_need_alc |>
 
 -   .sav data with formatting was too big (\> 100MB) for GitHub
 
-## Column (.panel width="50%")
 
 **Major Victories**
 
