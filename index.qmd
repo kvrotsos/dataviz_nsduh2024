@@ -12,9 +12,17 @@ orientation: columns
 
 # Data {.sidebar}
 
-These charts were created from the 2024 National Survey on Drug Use and Health (NSDUH). NSDUH began in 1971 and provides important information to guide and support prevention and treatment programs. NSDUH provides data for monitoring substance use trends and provides critical information to inform public health policy. Learn more about NSDUH at <https://nsduhweb.rti.org/respweb/homepage.cfm>
+**About the Data**
 
-These figures were created with unweighted survey data. In order to interpret the values as nationally representative, complex survey design, including survey weights, must be applied to the data. Our figures are only intended to display our ability to visualize data for the purposes of this class.
+2024 National Survey on Drug Use and Health (NSDUH) data was used to create this dashboard. NSDUH began in 1971 and provides important information to guide and support prevention and treatment programs. The target population includes civilian, non-institutionalized people ages 12 or older that live in the United States. NSDUH provides data for monitoring substance use trends and provides critical information to inform public health policy. Learn more about NSDUH at <https://nsduhweb.rti.org/respweb/homepage.cfm>
+
+These figures were created with unweighted survey data. In order to interpret the values as nationally representative, complex survey design, including survey weights, must be applied to the data. Our figures are only intended to display our ability to visualize data for the purposes of this class. We used imputed and/or recoded variables as suggested in the 2024 NSDUH Public Use File Data Users’ Guide to reduce bias related to missing and non-response data.
+
+**Alcohol Use Disorder**
+
+The NSDUH'S past-year alcohol use disorder measure was based on the criteria from the *Diagnostic and Statistical Manual of Mental Disorders*, 5th edition. Participants were classified as having alcohol use disorder if they met two or more of the 11 criteria. If participants reported alcohol use in the past 12 months and either used alcohol on six or more days in the past year or did not reply to the item, then they were asked questions about past-year alcohol use disorder.
+
+Additional information on the alcohol use disorder measure is available in the 2024 NSDUH Public Use File Codebook.
 
 ```{r}
 #| label: install-packages
@@ -128,7 +136,7 @@ nsduh2024$irpyud5mrj <- factor(
 ### Final Version
 
 ```{r}
-#| title: 'The complete 2024 NSDUH data set is very large and provides a wealth of information. For the purposes of this assignment, we are using only a portion of the data. The visual below provides a breakdown of race/ethnicity of participants in our portion of the data.'
+#| title: 'The visual below provides a breakdown of race/ethnicity of participants from the 2024 NSDUH.'
 #| fig-width: 10
 #| fig-height: 7
 #| out-width: '100%'
@@ -327,7 +335,7 @@ aud_pct_age_f |>
 
 ### About
 
-Description of how these were scored from codebook based on DSM-5
+This figure shows the percentage of participants that were classified as having alcohol use disorder in the past year within each age group.
 
 ### Draft 1
 
@@ -435,7 +443,7 @@ nsduh_need_alc |>
 
 ### About
 
-Description of how needing treatment is computed
+This figure shows the percentage of people who received substance use treatment for their alcohol use among participants who were classified as needing treatment (i.e., having alcohol use disorder).
 
 ### Draft 1
 
@@ -488,7 +496,6 @@ nsduh_need_alc |>
 -   Complex survey design (i.e., sample weights and variance estimation)
 
 -   .sav data with formatting was too big (\> 100MB) for GitHub
-
 
 **Major Victories**
 
