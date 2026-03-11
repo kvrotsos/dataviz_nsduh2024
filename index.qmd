@@ -117,7 +117,7 @@ nsduh2024$irpyud5mrj <- factor(
 
 # 2024 NSDUH Data
 
-## Column {.tabset}
+## Column {.tabset title="2024 NSDUH Data"}
 
 ### About the Data
 
