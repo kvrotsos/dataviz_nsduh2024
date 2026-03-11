@@ -10,20 +10,6 @@ embed-resources: true
 orientation: columns
 ---
 
-# Data {.sidebar}
-
-**About the Data**
-
-2024 National Survey on Drug Use and Health (NSDUH) data was used to create this dashboard. NSDUH began in 1971 and provides important information to guide and support prevention and treatment programs. The target population includes civilian, non-institutionalized people ages 12 or older that live in the United States. NSDUH provides data for monitoring substance use trends and provides critical information to inform public health policy. Learn more about NSDUH at <https://nsduhweb.rti.org/respweb/homepage.cfm>
-
-These figures were created with unweighted survey data. In order to interpret the values as nationally representative, complex survey design, including survey weights, must be applied to the data. Our figures are only intended to display our ability to visualize data for the purposes of this class. We used imputed and/or recoded variables as suggested in the 2024 NSDUH Public Use File Data Users’ Guide to reduce bias related to missing and non-response data.
-
-**Alcohol Use Disorder**
-
-The NSDUH'S past-year alcohol use disorder measure was based on the criteria from the *Diagnostic and Statistical Manual of Mental Disorders*, 5th edition. Participants were classified as having alcohol use disorder if they met two or more of the 11 criteria. If participants reported alcohol use in the past 12 months and either used alcohol on six or more days in the past year or did not reply to the item, then they were asked questions about past-year alcohol use disorder.
-
-Additional information on the alcohol use disorder measure is available in the 2024 NSDUH Public Use File Codebook.
-
 ```{r}
 #| label: install-packages
 #| echo: false
@@ -129,6 +115,22 @@ nsduh2024$irpyud5mrj <- factor(
 
 ```
 
+# 2024 NSDUH Data
+
+## Column {.tabset}
+
+### About the Data
+
+2024 National Survey on Drug Use and Health (NSDUH) data was used to create this dashboard. NSDUH began in 1971 and provides important information to guide and support prevention and treatment programs. The target population includes civilian, non-institutionalized people ages 12 or older that live in the United States. NSDUH provides data for monitoring substance use trends and provides critical information to inform public health policy. Learn more about NSDUH at <https://nsduhweb.rti.org/respweb/homepage.cfm>
+
+These figures were created with unweighted survey data. In order to interpret the values as nationally representative, complex survey design, including survey weights, must be applied to the data. Our figures are only intended to display our ability to visualize data for the purposes of this class. We used imputed and/or recoded variables as suggested in the 2024 NSDUH Public Use File Data Users’ Guide to reduce bias related to missing and non-response data.
+
+### Alcohol Use Disorder
+
+The NSDUH'S past-year alcohol use disorder measure was based on the criteria from the *Diagnostic and Statistical Manual of Mental Disorders*, 5th edition. Participants were classified as having alcohol use disorder if they met two or more of the 11 criteria. If participants reported alcohol use in the past 12 months and either used alcohol on six or more days in the past year or did not reply to the item, then they were asked questions about past-year alcohol use disorder.
+
+Additional information on the alcohol use disorder measure is available in the 2024 NSDUH Public Use File Codebook.
+
 # Sample by Race/Ethnicity
 
 ## Column (.panel width="70%")
@@ -194,7 +196,7 @@ ggplot(nsduh2024, aes(x = newrace2)) +
 
 ```
 
-# Alocohol Use Disorder and Poverty Status
+# AUD and Poverty Status
 
 ## Column (.panel width="70%")
 
@@ -270,7 +272,7 @@ ggplot(na.omit(nsduh2024), aes(x = poverty3, fill = irpyud5alc)) +
 
 ```
 
-# Alcohol Use Disorder by Age Group
+# AUD by Age Group
 
 ```{r}
 #kat
@@ -376,7 +378,7 @@ aud_pct_age |>
 
 ```
 
-# Received Alcohol Use Treatment if Needed
+# Alcohol Use Treatment Needs
 
 ```{r}
 # kat
@@ -487,7 +489,7 @@ nsduh_need_alc |>
 
 ```
 
-# Process
+# Our Process
 
 ## Column (.panel)
 
