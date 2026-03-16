@@ -34,6 +34,7 @@ library(dplyr)
 library(RColorBrewer)
 library(ggrepel)
 library(scales)
+library(ggtext)
 ```
 
 ```{r}
@@ -121,13 +122,13 @@ These figures were created with **unweighted survey data**. In order to interpre
 
 We used imputed and/or recoded variables as suggested in the [2024 NSDUH Public Use File Data Users’ Guide](https://www.samhsa.gov/data/sites/default/files/reports/rpt56775/2024-nsduh-puf-data-users-guide.pdf) to reduce bias related to missing and non-response data.
 
-| Variable | NSDUH 2024 Code | Response Options |
-|--------------------|--------------|--------------------------------------|
+| Variable | NSDUH Code | Factor Levels |
+|-------------------|-------------------|----------------------------------|
 | Race/Ethnicity | NEWRACE2 | White, Black/African American, Native American or Alaskan Native, Native Hawaiian or Other Pacific Island, Asian, Multiracial, or Hispanic |
 | Past-Year Alcohol Use Disorder | IRPYUD5ALC | No or Yes |
-| Poverty Status | POVERTY3 | Below Poverty Threshold, Income up to 2x Threshold, or Income up to 3x Threshold |
-| Age | CATAG3 | 12-17 Years Old, 18-25 Years Old, 26-34 Years Old, 34-49 Years Old, 50-64 Years Old, or 65 or Older |
-| Past-Year AUD Treatment | SUTNEDALCPY2 | No or Yes |
+| Poverty Level | POVERTY3 | Below Poverty Threshold, Income up to 2x Threshold, or Income up to 3x Threshold |
+| Age Group | CATAG3 | 12-17 Years Old, 18-25 Years Old, 26-34 Years Old, 34-49 Years Old, 50-64 Years Old, or 65 or Older |
+| Past-Year Alcohol Use Treatment | SUTNEDALCPY2 | No or Yes |
 
 ## Column {.tabset title="Alcohol Use Disorder"}
 
@@ -163,7 +164,21 @@ Additional information on NSDUH's AUD measure is available in the [2024 NSDUH Pu
 
 ### Count vs. Percentage
 
-fvmkfnbnb
+AUD was used as both count and percentage variables in different visualizations on this dashboard.
+
+-   **Count**
+
+    -   AUD was already a binary variable coded as 0 (*No*) and 1 (*Yes*), so it could readily be used as a count outcome
+
+    -   Used in **AUD and Poverty Level** visualization
+
+\
+
+-   **Percentage**
+
+    -   AUD was transformed into a percentage in the **AUD by Age Group** and **Alcohol Use Treatment** visualizations
+
+    -   Additional details on computation are in located in the About tabs on both pages
 
 # Sample by Race/Ethnicity
 
@@ -230,7 +245,7 @@ ggplot(nsduh2024, aes(x = newrace2)) +
 
 ```
 
-# AUD and Poverty Status
+# AUD and Poverty Level
 
 ## Column (.panel width="70%")
 
@@ -338,7 +353,7 @@ aud_pct_age_f$catag6 <- recode(
 ### Final Version
 
 ```{r}
-#| title: Past-Year Alcohol Use Disorder by Age Group in 2024
+#| title: How did rates of past-year AUD prevalence vary across age groups in 2024?
 #| fig-width: 10
 #| fig-height: 7
 #| out-width: '100%'
@@ -346,24 +361,28 @@ aud_pct_age_f$catag6 <- recode(
 aud_pct_age_f |>
   ggplot(aes(catag6, aud_pct, fill = catag6)) +
   geom_col(position = 'dodge') +
-  geom_label_repel(aes(label = scales::percent(aud_pct, accuracy = 0.1)),
-                   nudge_y = 0.01,
-                   fill = NA) +
-  scale_y_continuous(labels = scales::percent) +
+  geom_text_repel(aes(label = scales::percent(aud_pct, accuracy = 0.1)),
+                   nudge_y = 0.001,
+                   segment.color = NA,
+                   direction = 'y') +
+  scale_y_continuous(labels = scales::percent, limits = c(0, .15)) +
   #coord_flip() +
-  labs(title = 'Past-Year Alcohol Use Disorder by Age Group in 2024',
+  labs(title = 'AUD Rates are Highest Among Young Adult Age Groups in 2024',
+       subtitle = "Approximately 3 out of 10 young adults ages <span style='color:#D95F02;'>**18 to 25**</span> and <span style='color:#7570B3;'>**26 to 34**</span> had past-year AUD combined",
        caption = 'Source: 2024 NSDUH',
        x = 'Age (Years)',
-       y = 'Past Year AUD (Percentage)') +
+       y = 'Past-Year AUD (Percentage)') +
   theme_minimal() +
   scale_fill_brewer(palette = "Dark2") +
   theme(legend.position = "none",
         panel.grid.major.x = element_blank(),
-        plot.title = element_text(size = 16, face = "bold"),
-        axis.title = element_text(size = 12, face = "bold"),
-        axis.text.x = element_text(size = 10, face = "bold"),
-        #axis.text.y = element_text(size = 10),
-        plot.caption = element_text(size = 9, color = "gray50", hjust = 0)
+        plot.title = element_text(size = 18, face = "bold"),
+        plot.subtitle = element_markdown(), element_text(size = 16),
+        axis.title.x = element_text(size = 14, face = "bold", margin = margin(t = 10, unit = "pt")),
+        axis.text.x = element_text(size = 12, face = "bold"),
+        axis.title.y = element_text(size = 14, face = "bold", margin = margin(r = 10, unit = "pt")),
+        axis.text.y = element_text(size = 12, face = "bold"),
+        plot.caption = element_text(size = 10, color = "gray50", hjust = 0)
        )
 ```
 
@@ -372,6 +391,10 @@ aud_pct_age_f |>
 ### About
 
 This figure shows the percentage of participants that were classified as having alcohol use disorder in the past year within each age group.
+
+First, the data was grouped by age group and AUD status (i.e., No or Yes). The count for each Age Group by AUD status group and the percentage of participants within each age group by AUD status were calculated. Finally, the data was filtered to only include people with AUD (*n* = 6,069) to examine the distribution of AUD prevalence across age groups.
+
+Based on the visualization, the highest prevalence rates of AUD were in the 26 to 34 and 18 to 25 year old age groups, at 14.1% and 14.0%, respectively. This pattern aligns with the literature, which suggests that AUD peaks in young adulthood, then declines across time.
 
 ### Draft 1
 
@@ -412,7 +435,7 @@ aud_pct_age |>
 
 ```
 
-# Alcohol Use Treatment Needs
+# Alcohol Use Treatment
 
 ```{r}
 # kat
@@ -446,7 +469,7 @@ nsduh_need_alc <- nsduh2024 |>
 ### Final Version
 
 ```{r}
-#| title: 'Past-Year Alcohol Use Treatment Needs Met in 2024'
+#| title: 'How many people who needed alcohol use treatment in 2024 actually received some form of treatment?'
 #| fig-width: 10
 #| fig-height: 7
 #| out-width: '100%'
@@ -454,11 +477,13 @@ nsduh_need_alc <- nsduh2024 |>
 nsduh_need_alc |>
   ggplot(aes(sutrtalcpy2, treat_pct, fill = sutrtalcpy2)) +
   geom_col() +
-  scale_y_continuous(labels = scales::percent) +
-  geom_label_repel(aes(label = scales::percent(treat_pct, accuracy = 0.1)),
-                   nudge_y = 0.05,
-                   fill = NA) +
-  labs(title = 'Past-Year Alcohol Use Treatment Needs Met in 2024',
+  scale_y_continuous(labels = scales::percent, limits = c(0, 1)) +
+  geom_text_repel(aes(label = scales::percent(treat_pct, accuracy = 0.1)),
+                   nudge_y = 0.001,
+                   segment.color = NA,
+                   direction = 'y') +
+  labs(title = 'Most Alcohol Use Treatment Needs Were Unmet in 2024',
+       subtitle = 'Only about 1 in 10 people with AUD received any form of treatment',
        x = 'Received Treatment',
        y = 'Needed Treatment (Percentage)',
        caption = 'Source: 2024 NSDUH') +
@@ -466,11 +491,13 @@ nsduh_need_alc |>
   scale_fill_brewer(palette = "Paired") +
   theme(legend.position = "none",
         panel.grid.major.x = element_blank(),
-        plot.title = element_text(size = 16, face = "bold"),
-        axis.title = element_text(size = 12, face = "bold"),
-        axis.text.x = element_text(size = 12, face = "bold", color = "black"),
-        #axis.text.y = element_text(size = 10),
-        plot.caption = element_text(size = 9, color = "gray50", hjust = 0)
+        plot.title = element_text(size = 18, face = "bold"),
+        plot.subtitle = element_markdown(), element_text(size = 16),
+        axis.title.x = element_text(size = 14, face = "bold", margin = margin(t = 10, unit = "pt")),
+        axis.text.x = element_text(size = 12, face = "bold"),
+        axis.title.y = element_text(size = 14, face = "bold", margin = margin(r = 10, unit = "pt")),
+        axis.text.y = element_text(size = 12, face = "bold"),
+        plot.caption = element_text(size = 10, color = "gray50", hjust = 0)
        )
 
 ```
@@ -479,7 +506,11 @@ nsduh_need_alc |>
 
 ### About
 
-This figure shows the percentage of people who received substance use treatment for their alcohol use among participants who were classified as needing treatment (i.e., having alcohol use disorder).
+This figure shows the percentage of people who received substance use treatment for their alcohol use (*n* = 934) among participants who were classified as needing treatment (i.e., having alcohol use disorder; *n* = 6,069).
+
+First, the data was filtered to only include participants who were classified as needing alcohol use treatment due to having AUD in the past year. Then, the data was grouped by whether treatment was received (i.e., No or Yes). The percentage of participants who needed treatment by treatment status group was calculated. 
+
+Based on the visualization, the vast majority of participants who needed alcohol use treatment did not receive any form of treatment in 2024. It is important to note that this percentage does not take into account "successful" treatment, or whether treatment was continued beyond one session or resource accessed. 
 
 ### Draft 1
 
