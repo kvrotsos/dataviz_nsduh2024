@@ -212,6 +212,10 @@ finaldemo
 
 ## Column {.tabset width="30%"}
 
+### About
+
+
+
 ### Draft 1
 
 ```{r}
@@ -249,10 +253,14 @@ ggplot(nsduh2024, aes(x = newrace2)) +
 
 ## Column (.panel width="70%")
 
+### About
+
+One of the demographic pieces of information captured by the NSDUH is poverty status. The data set also provides information on alcohol use disorder. We wanted to see the breakdown of alcohol use disorder by poverty status, which is shown to the left.
+
 ### Final Version
 
 ```{r}
-#| title: 'One of the demographic pieces of information captured by the NSDUH is poverty status. The data set also provides information on alcohol use disorder. We wanted to see the breakdown of alcohol use disorder by poverty status, which is shown below.'
+#| title: 'Alcohol Use Disorder by Poverty Level'
 #| fig-width: 10
 #| fig-height: 7
 #| out-width: '100%'
@@ -263,7 +271,7 @@ ggplot(na.omit(nsduh2024), aes(x = poverty3, fill = irpyud5alc)) +
   labs(title = "Alcohol Use Disorder by Poverty Level", x = "Poverty Level", y = "Count",
        fill = "Alcohol Use Disorder") +
   scale_fill_brewer(palette = "Dark2") +
-  theme(legend.position = "none",
+  theme(legend.position = "top",
         panel.grid.major.x = element_blank(),
         plot.title = element_text(size = 16, face = "bold"),
         axis.title = element_text(size = 14, face = "bold"),
