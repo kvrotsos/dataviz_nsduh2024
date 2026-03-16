@@ -359,7 +359,7 @@ ggplot(na.omit(nsduh2024), aes(irpyud5alc)) +
         legend.key.height = unit(1, 'cm'), #change legend key height
         legend.key.width = unit(1, 'cm'), #change legend key width
         legend.title = element_text(size=14), #change legend title font size
-        legend.text = element_text(size=10))
+        legend.text = element_text(size=10),
         panel.grid.major.x = element_blank(), 
         plot.title = element_text(size = 16, face = "bold"),
         axis.title = element_text(size = 14, face = "bold"),
