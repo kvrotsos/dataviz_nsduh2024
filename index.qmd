@@ -187,28 +187,10 @@ AUD was used as both count and percentage variables in different visualizations 
 ### Final Version
 
 ```{r}
-#| title: 'The visual below provides a breakdown of race/ethnicity of participants from the 2024 NSDUH.'
+#| title: 'NSDUH 2024 Sample Race/Ethnicity'
 #| fig-width: 10
 #| fig-height: 7
 #| out-width: '100%'
-
-
-finalraceeth <- nsduh2024 %>%
-  drop_na(newrace2) %>%
-  count(newrace2) %>%
-  mutate(newrace2 = fct_reorder(newrace2, n)) %>%
-  ggplot(na.omit(nsduh2024), aes(x = newrace2)) +
-  geom_bar(stat = "count") +
-  stat_count(geom = "text", colour = "black", size = 3.5,
-aes(label = ..count..), position=position_stack(vjust=0.5)) +
-  theme_minimal()+
-  theme(panel.grid.major.x = element_blank(),
-        plot.title = element_text(size = 16, face = "bold"),
-        axis.title = element_text(size = 14, face = "bold"),
-        axis.text.x = element_text(size = 12),
-        axis.text.y = element_text(size = 12),
-        plot.caption = element_text(size = 9, color = "gray50", hjust = 0))
-
   
 finaldemo <- nsduh2024 %>%
   drop_na(newrace2) %>%
@@ -219,7 +201,7 @@ finaldemo <- nsduh2024 %>%
   geom_label(aes(label = n),
 position = position_dodge(width = 0.9),
 vjust = -0.5) +
-  labs(title = "Sample Race/Ethnicity", x = "Count", y = "Race/Ethnicity", caption = 'Source: 2024 NSDUH') +
+  labs(title = "2024 NSDUH Respondent Hispanic Origin and Race", x = "Count", y = "Hispanic Origin and Race", caption = 'Source: 2024 NSDUH') +
   theme_minimal()+
   theme(panel.grid.major.x = element_blank(),
         plot.title = element_text(size = 16, face = "bold"),
@@ -235,7 +217,7 @@ finaldemo
 
 ### About
 
-
+The visual below provides a breakdown of race and Hispanic origin of participants from the NSDUH 2024 sample. All categories other than "Hispanic" are specifically non-Hispanic individuals who identify with the given category. 
 
 ### Draft 1
 
