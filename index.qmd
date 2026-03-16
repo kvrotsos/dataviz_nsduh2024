@@ -259,11 +259,14 @@ ggplot(nsduh2024, aes(x = newrace2)) +
 ```{r}
 ##variable preparation
 
-#aud_pov <- nsduh2024 %>%
-  #group_by(poverty3, irpyud5alc) %>%
-  #summarize(aud_count = n()) %>%
-  #mutate(aud_pct = aud_count / sum(aud_count))
-#aud_pov
+aud_pov <- nsduh2024 %>%
+  group_by(poverty3, irpyud5alc) %>%
+  summarize(aud_count = n()) %>%
+  mutate(aud_pct = aud_count / sum(aud_count))
+aud_pov <- as.data.frame(aud_pov)
+aud_pov
+
+custom_colors <- c("Yes" = "#66A61E", "No" = "#E6AB02")
 ```
 
 ```{r}
@@ -272,16 +275,24 @@ ggplot(nsduh2024, aes(x = newrace2)) +
 #| fig-height: 7
 #| out-width: '100%'
 
-
-ggplot(na.omit(nsduh2024), aes(x = poverty3, fill = irpyud5alc)) +
-  geom_bar(stat = "count") +
-  stat_count(geom = "text", colour = "black", size = 3.5,
-aes(label = ..count..), position=position_stack(vjust=0.5)) +
+ggplot(na.omit(aud_pov), aes(x = poverty3, y = aud_count, fill = irpyud5alc)) +
+  geom_col() +
+  geom_label(
+    aes(label = paste0(round(aud_pct * 100, 0), "%")),
+    vjust = "center",
+    hjust = "center",
+    size = 4) + 
+  ylim(0, 40000) +
   theme_minimal() +
   labs(title = "Alcohol Use Disorder by Poverty Level", x = "Poverty Level", y = "Count",
-       fill = "Alcohol Use Disorder") +
-  scale_fill_brewer(palette = "Dark2") +
-  theme(legend.position = "top",
+       fill = "Alcohol Use Disorder", subtitle = "Across Poverty Levels, Proportions of Respondents with AUD Remains Nearly the Same") +
+  scale_fill_manual(values = custom_colors) +
+   theme(legend.position = "top",
+        legend.key.size = unit(1, 'cm'), #change legend key size
+        legend.key.height = unit(1, 'cm'), #change legend key height
+        legend.key.width = unit(1, 'cm'), #change legend key width
+        legend.title = element_text(size=14), #change legend title font size
+        legend.text = element_text(size=10),
         panel.grid.major.x = element_blank(),
         plot.title = element_text(size = 16, face = "bold"),
         axis.title = element_text(size = 14, face = "bold"),
@@ -289,29 +300,6 @@ aes(label = ..count..), position=position_stack(vjust=0.5)) +
         axis.text.y = element_text(size = 12),
         plot.caption = element_text(size = 9, color = "gray50", hjust = 0))
 
-#use to add percentage labels??
-
-
-#nsduh2024AUlabels = nsduh2024 %>%
-  #arrange(irpyud5alc, desc(value)) %>%
-  #group_by(irpyud5alc) %>%
-  #mutate(label_y = 0.5 * cumsum(pct),
-         #label_y = cumsum(label_y)) %>%
-  #ungroup()
-
-ggplot(na.omit(nsduh2024), aes(irpyud5alc)) +
-  geom_bar(aes(fill = poverty3), stat = "count") +
-  theme_minimal() +
-  labs(title = "Alcohol Use Disorder by Poverty Level", x = "Alcohol Use Disorder", y = "Count",
-       fill = "Poverty Level") +
-  scale_fill_brewer(palette = "Dark2") +
-  theme(legend.position = "top",
-        panel.grid.major.x = element_blank(),
-        plot.title = element_text(size = 16, face = "bold"),
-        axis.title = element_text(size = 14, face = "bold"),
-        axis.text.x = element_text(size = 12),
-        axis.text.y = element_text(size = 12),
-        plot.caption = element_text(size = 9, color = "gray50", hjust = 0))
 
 ```
 
@@ -356,6 +344,30 @@ ggplot(na.omit(nsduh2024), aes(x = poverty3, fill = irpyud5alc)) +
         plot.caption = element_text(size = 9, color = "gray50", hjust = 0))
 
 ```
+
+### Draft 3
+
+```{r}
+ggplot(na.omit(nsduh2024), aes(irpyud5alc)) +
+  geom_bar(aes(fill = poverty3), stat = "count") +
+  theme_minimal() +
+  labs(title = "Alcohol Use Disorder by Poverty Level", x = "Alcohol Use Disorder", y = "Count",
+       fill = "Poverty Level", subtitle = "Across Poverty Levels, Proportions of Respondents with AUD Remains the Same") +
+  scale_fill_brewer(palette = "Dark2") +
+  theme(legend.position = c(.8, .8),
+        legend.key.size = unit(1, 'cm'), #change legend key size
+        legend.key.height = unit(1, 'cm'), #change legend key height
+        legend.key.width = unit(1, 'cm'), #change legend key width
+        legend.title = element_text(size=14), #change legend title font size
+        legend.text = element_text(size=10))
+        panel.grid.major.x = element_blank(), 
+        plot.title = element_text(size = 16, face = "bold"),
+        axis.title = element_text(size = 14, face = "bold"),
+        axis.text.x = element_text(size = 12), 
+        axis.text.y = element_text(size = 12),
+        plot.caption = element_text(size = 9, color = "gray50", hjust = 0))
+```
+
 
 # AUD by Age Group
 
