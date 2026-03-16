@@ -191,6 +191,24 @@ AUD was used as both count and percentage variables in different visualizations 
 #| fig-width: 10
 #| fig-height: 7
 #| out-width: '100%'
+
+
+finalraceeth <- nsduh2024 %>%
+  drop_na(newrace2) %>%
+  count(newrace2) %>%
+  mutate(newrace2 = fct_reorder(newrace2, n)) %>%
+  ggplot(na.omit(nsduh2024), aes(x = newrace2)) +
+  geom_bar(stat = "count") +
+  stat_count(geom = "text", colour = "black", size = 3.5,
+aes(label = ..count..), position=position_stack(vjust=0.5)) +
+  theme_minimal()+
+  theme(panel.grid.major.x = element_blank(),
+        plot.title = element_text(size = 16, face = "bold"),
+        axis.title = element_text(size = 14, face = "bold"),
+        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 12),
+        plot.caption = element_text(size = 9, color = "gray50", hjust = 0))
+
   
 finaldemo <- nsduh2024 %>%
   drop_na(newrace2) %>%
@@ -198,6 +216,9 @@ finaldemo <- nsduh2024 %>%
   mutate(newrace2 = fct_reorder(newrace2, n)) %>%
   ggplot(aes(x = n, y = newrace2)) +
   geom_col(fill = "#1B9E77") +
+  geom_label(aes(label = n),
+position = position_dodge(width = 0.9),
+vjust = -0.5) +
   labs(title = "Sample Race/Ethnicity", x = "Count", y = "Race/Ethnicity", caption = 'Source: 2024 NSDUH') +
   theme_minimal()+
   theme(panel.grid.major.x = element_blank(),
@@ -260,13 +281,26 @@ One of the demographic pieces of information captured by the NSDUH is poverty st
 ### Final Version
 
 ```{r}
+##variable preparation
+
+aud_pov <- nsduh2024 %>%
+  group_by(poverty3, irpyud5alc) %>%
+  summarize(aud_count = n()) %>%
+  mutate(aud_pct = aud_count / sum(aud_count))
+aud_pov
+```
+
+```{r}
 #| title: 'Alcohol Use Disorder by Poverty Level'
 #| fig-width: 10
 #| fig-height: 7
 #| out-width: '100%'
 
+
 ggplot(na.omit(nsduh2024), aes(x = poverty3, fill = irpyud5alc)) +
-  geom_bar() +
+  geom_bar(stat = "count") +
+  stat_count(geom = "text", colour = "black", size = 3.5,
+aes(label = ..count..), position=position_stack(vjust=0.5)) +
   theme_minimal() +
   labs(title = "Alcohol Use Disorder by Poverty Level", x = "Poverty Level", y = "Count",
        fill = "Alcohol Use Disorder") +
