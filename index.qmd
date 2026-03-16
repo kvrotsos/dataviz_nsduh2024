@@ -198,9 +198,7 @@ finaldemo <- nsduh2024 %>%
   mutate(newrace2 = fct_reorder(newrace2, n)) %>%
   ggplot(aes(x = n, y = newrace2)) +
   geom_col(fill = "#1B9E77") +
-  geom_label(aes(label = n),
-position = position_dodge(width = 0.9),
-vjust = -0.5) +
+  geom_label(aes(label = n)) +
   labs(title = "2024 NSDUH Respondent Hispanic Origin and Race", x = "Count", y = "Hispanic Origin and Race", caption = 'Source: 2024 NSDUH') +
   theme_minimal()+
   theme(panel.grid.major.x = element_blank(),
