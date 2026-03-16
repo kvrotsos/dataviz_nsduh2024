@@ -257,6 +257,7 @@ ggplot(nsduh2024, aes(x = newrace2)) +
 ### Final Version
 
 ```{r}
+#| echo: false
 ##variable preparation
 
 aud_pov <- nsduh2024 %>%
@@ -264,7 +265,6 @@ aud_pov <- nsduh2024 %>%
   summarize(aud_count = n()) %>%
   mutate(aud_pct = aud_count / sum(aud_count))
 aud_pov <- as.data.frame(aud_pov)
-aud_pov
 
 custom_colors <- c("Yes" = "#66A61E", "No" = "#E6AB02")
 ```
