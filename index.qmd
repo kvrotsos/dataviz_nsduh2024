@@ -215,7 +215,7 @@ finaldemo
 
 ### About
 
-The visual below provides a breakdown of race and Hispanic origin of participants from the NSDUH 2024 sample. All categories other than "Hispanic" are specifically non-Hispanic individuals who identify with the given category. 
+The visual to the left provides a breakdown of race and Hispanic origin of participants from the NSDUH 2024 sample. All categories other than "Hispanic" are specifically non-Hispanic individuals who identify with the given category. 
 
 ### Draft 1
 
@@ -254,20 +254,16 @@ ggplot(nsduh2024, aes(x = newrace2)) +
 
 ## Column (.panel width="70%")
 
-### About
-
-One of the demographic pieces of information captured by the NSDUH is poverty status. The data set also provides information on alcohol use disorder. We wanted to see the breakdown of alcohol use disorder by poverty status, which is shown to the left.
-
 ### Final Version
 
 ```{r}
 ##variable preparation
 
-aud_pov <- nsduh2024 %>%
-  group_by(poverty3, irpyud5alc) %>%
-  summarize(aud_count = n()) %>%
-  mutate(aud_pct = aud_count / sum(aud_count))
-aud_pov
+#aud_pov <- nsduh2024 %>%
+  #group_by(poverty3, irpyud5alc) %>%
+  #summarize(aud_count = n()) %>%
+  #mutate(aud_pct = aud_count / sum(aud_count))
+#aud_pov
 ```
 
 ```{r}
@@ -307,7 +303,7 @@ ggplot(na.omit(nsduh2024), aes(irpyud5alc)) +
   geom_bar(aes(fill = poverty3), stat = "count") +
   theme_minimal() +
   labs(title = "Alcohol Use Disorder by Poverty Level", x = "Alcohol Use Disorder", y = "Count",
-       fill = "Alcohol Use Disorder") +
+       fill = "Poverty Level") +
   scale_fill_brewer(palette = "Dark2") +
   theme(legend.position = "top",
         panel.grid.major.x = element_blank(),
@@ -320,6 +316,10 @@ ggplot(na.omit(nsduh2024), aes(irpyud5alc)) +
 ```
 
 ## Column {.tabset width="30%"}
+
+### About
+
+One of the demographic pieces of information captured by the NSDUH is poverty status. The data set also provides information on alcohol use disorder. We wanted to see the breakdown of alcohol use disorder by poverty status, which is shown to the left. Notably, the proportions of respondents in each poverty level category who are identified as having AUD are consistent.
 
 ### Draft 1
 
