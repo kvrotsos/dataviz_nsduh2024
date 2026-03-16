@@ -107,28 +107,39 @@ nsduh2024$newrace2 <- factor(
 
 ```
 
-# 2024 NSDUH Data
+# Data
 
-## Column {.tabset title="2024 NSDUH Data" width="70%"}
+## Column {.tabset title="2024 NSDUH Data"}
 
-### About the Data
+### About
 
 2024 National Survey on Drug Use and Health (NSDUH) data was used to create this dashboard. NSDUH began in 1971 and provides important information to guide and support prevention and treatment programs. The target population includes civilian, non-institutionalized people ages 12 or older that live in the United States (N = 58,633). NSDUH provides data for monitoring substance use trends and provides critical information to inform public health policy. Learn more about NSDUH at <https://nsduhweb.rti.org/respweb/homepage.cfm>
 
-These figures were created with **unweighted survey data**. In order to interpret the values as nationally representative, complex survey design, including survey weights, must be applied to the data. Our figures are only intended to display our ability to visualize data for the purposes of this class. We used imputed and/or recoded variables as suggested in the [2024 NSDUH Public Use File Data Users’ Guide](https://www.samhsa.gov/data/sites/default/files/reports/rpt56775/2024-nsduh-puf-data-users-guide.pdf) to reduce bias related to missing and non-response data.
+These figures were created with **unweighted survey data**. In order to interpret the values as nationally representative, complex survey design, including survey weights, must be applied to the data. Our figures are only intended to display our ability to visualize data for the purposes of this class.
 
-### Alcohol Use Disorder Classification
+### Variables
+
+We used imputed and/or recoded variables as suggested in the [2024 NSDUH Public Use File Data Users’ Guide](https://www.samhsa.gov/data/sites/default/files/reports/rpt56775/2024-nsduh-puf-data-users-guide.pdf) to reduce bias related to missing and non-response data.
+
+| Variable | NSDUH 2024 Code | Response Options |
+|--------------------|--------------|--------------------------------------|
+| Race/Ethnicity | NEWRACE2 | White, Black/African American, Native American or Alaskan Native, Native Hawaiian or Other Pacific Island, Asian, Multiracial, or Hispanic |
+| Past-Year Alcohol Use Disorder | IRPYUD5ALC | No or Yes |
+| Poverty Status | POVERTY3 | Below Poverty Threshold, Income up to 2x Threshold, or Income up to 3x Threshold |
+| Age | CATAG3 | 12-17 Years Old, 18-25 Years Old, 26-34 Years Old, 34-49 Years Old, 50-64 Years Old, or 65 or Older |
+| Past-Year AUD Treatment | SUTNEDALCPY2 | No or Yes |
+
+## Column {.tabset title="Alcohol Use Disorder"}
+
+### Classification
 
 The NSDUH'S past-year alcohol use disorder (AUD) measure was based on the criteria from the *Diagnostic and Statistical Manual of Mental Disorders*, 5th edition. Participants were classified as having AUD if they met two or more of the 11 criteria listed below:
 
-1.  Ended up drinking alcohol many times in larger amounts or for a longer time than
-    intended
+1.  Ended up drinking alcohol many times in larger amounts or for a longer time than intended
 
-2.  One or more times tried and was unable to cut down or stop drinking alcohol or
-    wished could cut down or stop drinking alcohol
+2.  One or more times tried and was unable to cut down or stop drinking alcohol or wished could cut down or stop drinking alcohol
 
-3.  Spent a great deal of time drinking alcohol, feeling its effects, or getting over the
-    effects of drinking, or trying to get alcohol
+3.  Spent a great deal of time drinking alcohol, feeling its effects, or getting over the effects of drinking, or trying to get alcohol
 
 4.  Wanted to use alcohol so badly could not think of anything else or had a strong urge to use alcohol
 
@@ -136,35 +147,23 @@ The NSDUH'S past-year alcohol use disorder (AUD) measure was based on the criter
 
 6.  Problems with family or friends that were caused or made worse by using alcohol and continued to use alcohol even though it often caused arguments or problems with family or friends
 
-7.  Gave up or spent a lot less time doing important social, occupational, or recreational
-    activities because of alcohol use
+7.  Gave up or spent a lot less time doing important social, occupational, or recreational activities because of alcohol use
 
-8.  Repeatedly got into situations where drinking alcohol increased your chances of
-    getting physically hurt
+8.  Repeatedly got into situations where drinking alcohol increased your chances of getting physically hurt
 
-9.  Continued to use alcohol even though it was causing problems with emotions, mental
-    health, or physical health, or drinking gave you repeated blackouts
+9.  Continued to use alcohol even though it was causing problems with emotions, mental health, or physical health, or drinking gave you repeated blackouts
 
-10. Needed to drink a lot more alcohol to get the desired feeling, or drinking the same
-    amount had less of an effect
+10. Needed to drink a lot more alcohol to get the desired feeling, or drinking the same amount had less of an effect
 
-11. Reported experiencing two or more alcohol withdrawal symptoms after alcohol use
-    was cut back or stopped or respondent used the same or similar substance to avoid
-    having alcohol withdrawal symptoms during the past 12 months. Symptoms include: (i) sweating or feeling that heart was beating fast; (ii) having hands tremble; (iii) having trouble sleeping; (iv) vomiting or feeling nauseous; (v) seeing, hearing, or feeling things that were not really there; (vi) feeling like could not sit still; (vii) feeling anxious; and (viii) having seizures or fits. Substances used to avoid withdrawal symptoms could include alcohol or prescription sedatives, tranquilizers, sleeping pills, or downers.
+11. Reported experiencing two or more alcohol withdrawal symptoms after alcohol use was cut back or stopped or respondent used the same or similar substance to avoid having alcohol withdrawal symptoms during the past 12 months. Symptoms include: (i) sweating or feeling that heart was beating fast; (ii) having hands tremble; (iii) having trouble sleeping; (iv) vomiting or feeling nauseous; (v) seeing, hearing, or feeling things that were not really there; (vi) feeling like could not sit still; (vii) feeling anxious; and (viii) having seizures or fits. Substances used to avoid withdrawal symptoms could include alcohol or prescription sedatives, tranquilizers, sleeping pills, or downers.
 
-If participants reported alcohol use in the past 12 months and either used alcohol on six or more days in the past year or did not reply to the item, then they were asked questions about past-year AUD. Additional information on the AUD measure is available in the [2024 NSDUH Public Use File Codebook](https://www.samhsa.gov/data/system/files/media-puf-file/nsduh-2024-ds0001-info-codebook_v1.pdf).
+If participants reported alcohol use in the past 12 months and either used alcohol on six or more days in the past year or did not reply to the item, then they were asked questions about past-year AUD.
 
-## Column {.tabset title="Variables" width="30%"}
+Additional information on NSDUH's AUD measure is available in the [2024 NSDUH Public Use File Codebook](https://www.samhsa.gov/data/system/files/media-puf-file/nsduh-2024-ds0001-info-codebook_v1.pdf).
 
-### Race/Ethnicity
+### Count vs. Percentage
 
-### AUD
-
-Count Percentage
-
-### Poverty Status
-
-### Age
+fvmkfnbnb
 
 # Sample by Race/Ethnicity
 
