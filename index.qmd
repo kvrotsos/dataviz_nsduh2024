@@ -130,6 +130,20 @@ We used imputed and/or recoded variables as suggested in the [2024 NSDUH Public 
 | Age Group | CATAG3 | 12-17 Years Old, 18-25 Years Old, 26-34 Years Old, 34-49 Years Old, 50-64 Years Old, or 65 or Older |
 | Past-Year Alcohol Use Treatment | SUTNEDALCPY2 | No or Yes |
 
+### Process
+
+**Major Challenges**
+
+-   Complex survey design (i.e., sample weights and variance estimation)
+
+-   .sav data with formatting was too big (\> 100MB) for GitHub
+
+**Major Victories**
+
+-   Figured out how to format visualizations so they're not too small to read on the dashboard
+
+-   Used the .RData file and formatted variables ourselves
+
 ## Column {.tabset title="Alcohol Use Disorder"}
 
 ### Classification
@@ -187,7 +201,7 @@ AUD was used as both count and percentage variables in different visualizations 
 ### Final Version
 
 ```{r}
-#| title: 'What is the breakdown of the 2024 NSDUH data by race and ethnicity?'
+#| title: 'What is the breakdown of the 2024 NSDUH data by race/ethnicity?'
 #| fig-width: 10
 #| fig-height: 7
 #| out-width: '100%'
@@ -197,17 +211,18 @@ finaldemo <- nsduh2024 %>%
   count(newrace2) %>%
   mutate(newrace2 = fct_reorder(newrace2, n)) %>%
   ggplot(aes(x = n, y = newrace2)) +
-  geom_col(fill = "#1B9E77") +
-  geom_label(aes(label = n)) +
-  labs(title = "2024 NSDUH Respondent Hispanic Origin and Race", x = "Count", y = "Hispanic Origin and Race", caption = 'Source: 2024 NSDUH') +
-  scale_y_discrete(labels = label_wrap(width = 20))+
-  theme_minimal()+
+  geom_col(fill='#1B9E77') +
+  geom_label(aes(label = comma(n))) +
+  labs(title = "2024 NSDUH Respondent Race/Ethnicity", x = "Count", y = "Race/Ethnicity", caption = 'Source: 2024 NSDUH') +
+  scale_y_discrete(labels = label_wrap(width = 20)) +
+  scale_x_continuous(labels = label_comma()) +
+  theme_minimal() +
   theme(panel.grid.major.x = element_blank(),
         plot.title = element_text(size = 16, face = "bold"),
         axis.title = element_text(size = 14, face = "bold"),
         axis.text.x = element_text(size = 12),
         axis.text.y = element_text(size = 12),
-        plot.caption = element_text(size = 9, color = "gray50", hjust = 0))
+        plot.caption = element_text(size = 10, color = "gray50", hjust = 0))
 
 finaldemo
 ```
@@ -216,7 +231,7 @@ finaldemo
 
 ### About
 
-The visual to the left provides a breakdown of race and Hispanic origin of participants from the NSDUH 2024 sample. All categories other than "Hispanic" are specifically non-Hispanic individuals who identify with the given category. 
+The visual to the left provides a breakdown of the race/ethnicity of participants from the NSDUH 2024 sample. All categories other than "Hispanic" are specifically non-Hispanic individuals who identify with the given category. 
 
 ### Draft 1
 
@@ -267,7 +282,8 @@ aud_pov <- nsduh2024 %>%
   mutate(aud_pct = aud_count / sum(aud_count))
 aud_pov <- as.data.frame(aud_pov)
 
-custom_colors <- c("Yes" = "#66A61E", "No" = "#E6AB02")
+#from okabe ito
+custom_colors <- c("Yes" = "#F5C710", "No" = "#56B4E9")
 ```
 
 ```{r}
@@ -282,12 +298,14 @@ ggplot(na.omit(aud_pov), aes(x = poverty3, y = aud_count, fill = irpyud5alc)) +
     aes(label = paste0(round(aud_pct * 100, 0), "%")),
     vjust = "center",
     hjust = "center",
-    size = 4) + 
+    size = 4,
+    fill = 'white') + 
   ylim(0, 40000) +
+  scale_y_continuous(labels = label_comma()) +
   theme_minimal() +
-  labs(title = "Alcohol Use Disorder by Poverty Level", x = "Poverty Level", y = "Count",
-       fill = "Alcohol Use Disorder", subtitle = "Across Poverty Levels, Proportions of Respondents with AUD Remains Nearly the Same") +
-  scale_fill_manual(values = custom_colors) +
+  labs(title = "About 1 in 10 respondents had AUD across poverty level in 2024", x = "Poverty Level", y = "Count",
+       fill = "Alcohol Use Disorder", subtitle = "Proportions of past-year AUD rates were nearly equal at each poverty level", caption = 'Source: 2024 NSDUH') +
+   scale_fill_manual(values = custom_colors) +
    theme(legend.position = "top",
         legend.key.size = unit(1, 'cm'), #change legend key size
         legend.key.height = unit(1, 'cm'), #change legend key height
@@ -296,10 +314,12 @@ ggplot(na.omit(aud_pov), aes(x = poverty3, y = aud_count, fill = irpyud5alc)) +
         legend.text = element_text(size=10),
         panel.grid.major.x = element_blank(),
         plot.title = element_text(size = 16, face = "bold"),
-        axis.title = element_text(size = 14, face = "bold"),
-        axis.text.x = element_text(size = 12),
+        plot.subtitle = element_text(size = 16),
+        axis.title.x = element_text(size = 14, face = "bold", margin = margin(t = 10, unit = "pt")),
+        axis.title.y = element_text(size = 14, face = "bold", margin = margin(r = 10, unit = "pt")),
+        axis.text.x = element_text(size = 12, face = "bold"),
         axis.text.y = element_text(size = 12),
-        plot.caption = element_text(size = 9, color = "gray50", hjust = 0))
+        plot.caption = element_text(size = 10, color = "gray50", hjust = 0))
 
 
 ```
@@ -537,7 +557,7 @@ nsduh_need_alc |>
        y = 'Needed Treatment (Percentage)',
        caption = 'Source: 2024 NSDUH') +
   theme_minimal() +
-  scale_fill_brewer(palette = "Paired") +
+  scale_fill_brewer(palette = "Set1") +
   theme(legend.position = "none",
         panel.grid.major.x = element_blank(),
         plot.title = element_text(size = 18, face = "bold"),
@@ -602,19 +622,3 @@ nsduh_need_alc |>
   theme(legend.position = "none")
 
 ```
-
-# Our Process
-
-## Column (.panel)
-
-**Major Challenges**
-
--   Complex survey design (i.e., sample weights and variance estimation)
-
--   .sav data with formatting was too big (\> 100MB) for GitHub
-
-**Major Victories**
-
--   Figured out how to format visualizations so they're not too small to read on the dashboard
-
--   Used the .RData file and formatted variables ourselves
