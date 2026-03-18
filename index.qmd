@@ -95,7 +95,7 @@ nsduh2024$irpyud5alc <- factor(
 nsduh2024$poverty3 <- factor(
   nsduh2024$poverty3,
   levels = c(".", "1", "2", "3"),           # Order of levels
-  labels = c("College Dorm", "Below Poverty Threshold", "Income up to 2x Threshold", "Income up to 3x Threshold") # Labels for each level
+  labels = c("College Dorm", "Below Threshold", "Income up to 2x Threshold", "Income up to 3x Threshold") # Labels for each level
 )
 
 # race/ethnicity as a factor
@@ -126,7 +126,7 @@ We used imputed and/or recoded variables as suggested in the [2024 NSDUH Public 
 |-------------------|-------------------|----------------------------------|
 | Race/Ethnicity | NEWRACE2 | White, Black/African American, Native American or Alaskan Native, Native Hawaiian or Other Pacific Island, Asian, Multiracial, or Hispanic |
 | Past-Year Alcohol Use Disorder | IRPYUD5ALC | No or Yes |
-| Poverty Level | POVERTY3 | Below Poverty Threshold, Income up to 2x Threshold, or Income up to 3x Threshold |
+| Poverty Level | POVERTY3 | Below Threshold, Income up to 2x Threshold, or Income up to 3x Threshold |
 | Age Group | CATAG3 | 12-17 Years Old, 18-25 Years Old, 26-34 Years Old, 34-49 Years Old, 50-64 Years Old, or 65 or Older |
 | Past-Year Alcohol Use Treatment | SUTNEDALCPY2 | No or Yes |
 
